@@ -1,0 +1,56 @@
+﻿<Window x:Class="LYSmartHouse.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:LYSmartHouse"
+        xmlns:c="clr-namespace:LYSmartHouse.Controls"
+        xmlns:v="clr-namespace:LYSmartHouse.View"
+        Title="龙渊智能家居" Height="700" Width="1024" WindowStartupLocation="CenterScreen">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <v:BannerView />
+        <c:WorkspaceItemsControl x:Name="ItemsControl" Grid.Row="1">
+            <c:WorkspaceItem X="0" Y="0" Width="300" Height="150" Title="温湿度">
+                <c:WorkspaceItem.Icon>
+                    <Image Source="/Images/ThermometerIcon.png" />
+                </c:WorkspaceItem.Icon>
+                <v:TemperatureHumidityView />
+            </c:WorkspaceItem>
+            
+            <c:WorkspaceItem X="300" Y="0" Width="200" Height="350" Title="摄像机">
+                <c:WorkspaceItem.Icon>
+                    <Image Source="/Images/CameraIcon.png" />
+                </c:WorkspaceItem.Icon>
+                <v:CameraControlView />
+            </c:WorkspaceItem>
+            
+            <c:WorkspaceItem X="0" Y="150" Width="150" Height="100" Title="报警器">
+                <c:WorkspaceItem.Icon>
+                    <Image Source="/Images/AlarmIcon.png" />
+                </c:WorkspaceItem.Icon>
+                <v:AlarmControlView />
+            </c:WorkspaceItem>
+            
+
+            <c:WorkspaceItem X="150" Y="150" Width="150" Height="100" Title="照明灯">
+                <c:WorkspaceItem.Icon>
+                    <Image Source="/Images/LampIcon.png" />
+                </c:WorkspaceItem.Icon>
+                <v:LampControlView />
+            </c:WorkspaceItem>
+
+            
+
+            <c:WorkspaceItem X="0" Y="250" Width="300" Height="100" Title="电动窗帘">
+                <c:WorkspaceItem.Icon>
+                    <Image Source="/Images/CurtainIcon.png" />
+                </c:WorkspaceItem.Icon>
+                <v:CurtainControlView />
+            </c:WorkspaceItem>
+        </c:WorkspaceItemsControl>
+    </Grid>
+
+</Window>

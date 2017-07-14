@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="LYSmartHouse.View.BannerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignWidth="1031.644" d:DesignHeight="122">
+    <Grid x:Name="Header"
+			Background="#FFFEFEFE" Grid.RowSpan="1" Grid.Row="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Rectangle Stroke="{x:Null}" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Grid.Row="1">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFFFFFFF" Offset="0.007"/>
+                    <GradientStop Color="#FFEBEBEB" Offset="0.322"/>
+                    <GradientStop Color="#FFEBEBEB" Offset="0.997"/>
+                    <GradientStop Color="#FFFFFFFF" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Fill="#FF00B7F0"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="HeaderPath" Height="11" VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="15"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Fill="#FFFEFEFE" StrokeThickness="0"/>
+                <Path
+						Margin="-2,0,0,0"
+						Data="M1.4022437,0 C1.4022437,0 -0.73559234,1.2299903E-15 -0.73559234,1.2299903E-15 -0.73559234,-0.81287164 -0.77699364,8.6910131 -0.77699364,11 -0.77699364,11.000236 1.4022437,11 1.4022437,11 1.4022437,11 15,11 15,11 15,11 1.4022437,0 1.4022437,0 z"
+						Fill="#FFFDFDFD"
+						Opacity="1"
+						Stretch="Fill"
+						Grid.Column="1"
+						SnapsToDevicePixels="True" StrokeThickness="0"/>
+            </Grid>
+            <TextBlock Text="Welcome Back" FontFamily="Gotham Book" FontSize="11" Foreground="#FFFFFFFF" d:LayoutOverrides="Width" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBlock Text="{Binding LoginName}" FontFamily="GothamBook" FontSize="11" Foreground="#FFFFFFFF" Grid.Column="1" VerticalAlignment="Center"  Margin="76 0,0,0"/>
+            <TextBlock Text="Sign Out" FontFamily="Gotham Book" FontSize="11" Foreground="Black" HorizontalAlignment="Right" TextDecorations="Underline" Grid.Column="2" VerticalAlignment="Center" SnapsToDevicePixels="True" Margin="10,0"/>
+            <Rectangle Fill="#FF73D9F7" VerticalAlignment="Top" Height="1" Margin="0,11,15,0"/>
+            <Rectangle Fill="#FF73D9F7" VerticalAlignment="Bottom" Height="1" Grid.Column="1" Margin="2,0,0,1" Grid.ColumnSpan="2"/>
+        </Grid>
+        <StackPanel x:Name="DoctorName" HorizontalAlignment="Right" Width="250" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,5,10,0"/>
+
+        <Rectangle
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Bottom"
+				Height="1"
+				Stretch="Fill"
+				Opacity="1"
+				
+				Stroke="#ffffff"
+				StrokeThickness="1" Grid.Row="1" Margin="0,0,0,1" />
+        <Image HorizontalAlignment="Left" Grid.Row="1" Width="228" Margin="18,-15,0,0" Source="/Images/Logo.png"/>
+    </Grid>
+
+
+</UserControl>

@@ -1,0 +1,160 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:LYSmartHouse.Controls"
+    xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+    <Style TargetType="{x:Type local:WorkspaceItemsControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:WorkspaceItemsControl}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Canvas IsItemsHost="True" Background="#DBDBDB" Name="PART_Canvas" 
+                        ClipToBounds="True" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DrawingImage x:Key="ToggleButtonCheckedDrawingImage" PresentationOptions:Freeze="True">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Geometry="M0,0 L34,0 34,26 0,26Z" Brush="Transparent" />
+                <GeometryDrawing Brush="White" Geometry="M15,9 L22,9 22,16 19,16 19,15 21,15 21,11 16,11 16,12 15,12Z M12,12 L19,12 19,19 13,19 13,18 18,18 18,14 13,14 13,19 12,19Z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <DrawingImage x:Key="ToggleButtonUncheckedDrawingImage" PresentationOptions:Freeze="True">
+        <DrawingImage.Drawing>
+            <DrawingGroup >
+                <GeometryDrawing Geometry="M0,0 L34,0 34,26 0,26Z" Brush="Transparent" />
+                <GeometryDrawing Brush="White" Geometry="M13,9 L22,9 22,18 14,18 14,17 21,17 21,12 14,12 14,18 13,18Z" />
+                <!--<DrawingGroup.GuidelineSet>
+                    <GuidelineSet GuidelinesX="0,13,14,21,22,34" GuidelinesY="0,9,12,17,18,26" />
+                </DrawingGroup.GuidelineSet>-->
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <Style TargetType="ToggleButton" x:Key="ToggleButtonStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Canvas Width="34" Height="26">
+                        <Canvas.Background>
+                            <SolidColorBrush x:Name="ToggleButtonBackgroundBrush" Color="Transparent" />
+                        </Canvas.Background>
+                        <Image Name="ToggleButtonImage" Source="{StaticResource ToggleButtonUncheckedDrawingImage}" Width="34" Height="26" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,0,5,0" Stretch="None" />
+                    </Canvas>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="ToggleButtonImage" Property="Source" Value="{StaticResource ToggleButtonCheckedDrawingImage}" />
+                        </Trigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="ToggleButtonBackgroundBrush" Storyboard.TargetProperty="Color" To="#00C3FF" Duration="0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.PreviewMouseDown">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="ToggleButtonBackgroundBrush" Storyboard.TargetProperty="Color" To="#00B2E8" Duration="0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="ToggleButtonBackgroundBrush" Storyboard.TargetProperty="Color" To="Transparent" Duration="0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:WorkspaceItem}">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:WorkspaceItem}">
+                    <Border Name="ItemBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{Binding RelativeSource={RelativeSource TemplatedParent},Path=TitleHeight}" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid Background="#00B7F0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter Margin="3,3,3,3" Content="{TemplateBinding Icon}" VerticalAlignment="Center" />
+                                <TextBlock Margin="5,0,0,0" Text="{TemplateBinding Title}" FontSize="15" Foreground="White" FontFamily="Microsoft YaHei" VerticalAlignment="Center" Grid.Column="1" />
+
+
+                                <ToggleButton x:Name="PART_MaximumToggleButton" Style="{StaticResource ToggleButtonStyle}"
+                                         Content="Maximum" Focusable="False" Grid.Column="2" Visibility="Hidden" />
+
+                                <Image Grid.ColumnSpan="3" Stretch="Fill" VerticalAlignment="Top" Margin="1,1,1,0" Height="1">
+                                    <Image.Source>
+                                        <DrawingImage>
+                                            <DrawingImage.Drawing>
+                                                <DrawingGroup>
+                                                    <GeometryDrawing Geometry="M0,0 L1,0" >
+                                                        <GeometryDrawing.Pen>
+                                                            <Pen Brush="#73D9F7" Thickness="1" />
+                                                        </GeometryDrawing.Pen>
+                                                    </GeometryDrawing>
+                                                    <DrawingGroup.GuidelineSet>
+                                                        <GuidelineSet GuidelinesX="0,1" GuidelinesY="0,1" />
+                                                    </DrawingGroup.GuidelineSet>
+                                                </DrawingGroup>
+                                            </DrawingImage.Drawing>
+                                        </DrawingImage>
+                                    </Image.Source>
+                                </Image>
+                            </Grid>
+                            <Border Grid.Row="1" BorderThickness="2,0,2,2" BorderBrush="#00B7F0">
+                                <ContentPresenter Name="PART_ContentPresenter" Grid.Row="1" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <!--<ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="ItemBorder">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_MaximumToggleButton" Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="ItemBorder">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_MaximumToggleButton" Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>-->
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
